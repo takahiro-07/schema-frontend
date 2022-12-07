@@ -1,7 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: process.env.REACT_APP_API_HOST,
+  responseType: "json",
+});
 
 function App() {
+  const [todos, setTodos ] = useState("sss");
+
+  useEffect(() => {
+    (async () => {
+      const data = await api.get("/api/todos");
+      if (data) {
+        setTodos(data.data.text);
+      }
+    })();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +35,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>{todos}</p>
       </header>
     </div>
   );
