@@ -4,7 +4,7 @@ import "./App.css";
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://app.takahiro.tk",
+  baseURL: process.env.REACT_APP_API_HOST,
   responseType: "json",
 });
 
